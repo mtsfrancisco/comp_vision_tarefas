@@ -20,7 +20,7 @@ def adaptive_threshold_mean_c(image, tamanho_bloco=11, c=2):
                 thresholded[i, j] = 255
             else:
                 thresholded[i, j] = 0
-                
+        
     return thresholded
 
 def threshold(img, thresh):
