@@ -2,7 +2,9 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 
+
 def adaptive_threshold_mean_c(image, tamanho_bloco=11, c=2):
+
     altura, largura = image.shape
     thresholded = np.zeros_like(image)
     meio_bloco = tamanho_bloco // 2
@@ -36,12 +38,12 @@ def threshold(img, thresh):
 
     return img
 
-img = cv2.imread(r"imagens\image1.webp")
+img = cv2.imread("imagens/image1.webp")
 gray_img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 gray_copy = gray_img.copy()
 thresh_img = threshold(gray_img, 127)
 mean_thresh = adaptive_threshold_mean_c(gray_copy)
-
 cv2.imshow("Mean Thresh", mean_thresh)
 cv2.imshow("Thresh", thresh_img)
+
 cv2.waitKey(0)

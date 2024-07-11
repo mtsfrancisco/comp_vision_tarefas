@@ -27,21 +27,22 @@ def convolucao(img, kernel):
             else:
                 img_copy[i, j] = soma
 
-    return img_copy.astype(np.uint8)
+    #return img_copy.astype(np.uint8)
+    return img_copy
 
-img = cv2.imread(r"imagens\image1.webp")
+img = cv2.imread("imagens/image1.webp")
 gray_img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 gray_copy = gray_img.copy()
 
 conv_img = convolucao(gray_img, kernel)
 opencv_conv = cv2.filter2D(gray_copy, -1, kernel)
 
-histo = cv2.calcHist([conv_img], [0], None, [256], [0, 256])
+#histo = cv2.calcHist([conv_img], [0], None, [256], [0, 256])
 
 cv2.imshow("OpenCV", opencv_conv)
 cv2.imshow("Imagem", conv_img)
 
-plt.plot(histo, color='gray')
-plt.show()
+#plt.plot(histo, color='gray')
+#plt.show()
 cv2.waitKey(0)
 
