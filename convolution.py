@@ -7,34 +7,33 @@ kernel = np.array([[1, 0, -1],
                      [1, 0, -1]])
 
 
-def convolucao(img, kernel):
-    altura, largura = img.shape[:2]
-    k_altura, k_largura = kernel.shape[:2]
-    pad = k_largura // 2
-    img_copy = np.zeros((altura + 2 * pad, largura + 2 * pad))
+def convoluton(img, kernel):
+    height, width = img.shape[:2]
+    k_height, k_width = kernel.shape[:2]
+    pad = k_width // 2
+    img_copy = np.zeros((height + 2 * pad, width + 2 * pad))
     kernel = cv2.flip(kernel, -1)
 
-    for i in range(pad, altura - pad):
-        for j in range(pad, largura - pad):
-            soma = 0
-            for m in range(k_altura):
-                for n in range(k_largura):
-                    soma += int(img[i - pad + m, j - pad + n]) * int(kernel[m, n])
-            if soma > 255:
+    for i in range(pad, height - pad):
+        for j in range(pad, width - pad):
+            sum = 0
+            for m in range(k_height):
+                for n in range(k_width):
+                    sum += int(img[i - pad + m, j - pad + n]) * int(kernel[m, n])
+            if sum > 255:
                 img_copy[i, j] = 255
-            elif soma < 0:
+            elif sum < 0:
                 img_copy[i, j] = 0
             else:
-                img_copy[i, j] = soma
+                img_copy[i, j] = sum
 
-    #return img_copy.astype(np.uint8)
-    return img_copy
+    return img_copy.astype(np.uint8)
 
-img = cv2.imread("imagens/image1.webp")
+img = cv2.imread("images/image1.webp")
 gray_img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 gray_copy = gray_img.copy()
 
-conv_img = convolucao(gray_img, kernel)
+conv_img = convoluton(gray_img, kernel)
 opencv_conv = cv2.filter2D(gray_copy, -1, kernel)
 
 #histo = cv2.calcHist([conv_img], [0], None, [256], [0, 256])
