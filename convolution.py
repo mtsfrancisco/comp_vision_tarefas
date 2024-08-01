@@ -36,12 +36,8 @@ gray_copy = gray_img.copy()
 conv_img = convoluton(gray_img, kernel)
 opencv_conv = cv2.filter2D(gray_copy, -1, kernel)
 
-#histo = cv2.calcHist([conv_img], [0], None, [256], [0, 256])
 
 cv2.imshow("OpenCV", opencv_conv)
 cv2.imshow("Imagem", conv_img)
-
-#plt.plot(histo, color='gray')
-#plt.show()
 cv2.waitKey(0)
 

@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import cv2
 
-img = cv2.imread("imagens/image1.webp")
+img = cv2.imread("images/image1.webp")
 chans = cv2.split(img)
 colors = ("b", "g", "r")
 print(img.shape)

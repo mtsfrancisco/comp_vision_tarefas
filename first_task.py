@@ -8,28 +8,28 @@ def calc_hist(img):
     plt.show()
 
 
-def mudar_intensidade(img):
-    altura, largura = img.shape
-    intensidade = input("Digite o valor: ")
+def change_intensity(img):
+    height, width = img.shape
+    intensity = input("Value: ")
 
-    for i in range(altura):
-        for j in range(largura):
-            nova_intensidade = int(img[i, j]) + int(intensidade)
-            if (nova_intensidade > 255):
-                nova_intensidade = 255
-            elif (nova_intensidade < 0):
-                nova_intensidade = 0
-            img[i, j] = nova_intensidade
+    for i in range(height):
+        for j in range(width):
+            new_intensity = int(img[i, j]) + int(intensity)
+            if (new_intensity > 255):
+                new_intensity = 255
+            elif (new_intensity < 0):
+                new_intensity = 0
+            img[i, j] = new_intensity
 
-    cv2.imshow("Imagem", img)
+    cv2.imshow("Image", img)
     cv2.waitKey(0)
 
 
-def inverter_intensidade(img):
-    altura, largura = img.shape
+def invert_intensity(img):
+    height, width = img.shape
 
-    for i in range(altura):
-        for j in range(largura):
+    for i in range(height):
+        for j in range(width):
             img[i, j] = 255 - int(img[i, j])
 
     cv2.imshow("Imagem", img)
@@ -37,18 +37,18 @@ def inverter_intensidade(img):
 
 
 
-img = cv2.imread(r"imagens\image1.webp")
+img = cv2.imread("image\image1.webp")
 gray_img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
 print(gray_img.shape)
 
-cv2.imshow("Imagem", gray_img)
+cv2.imshow("Image", gray_img)
 cv2.waitKey(0)
 
 calc_hist(gray_img)
 
-mudar_intensidade(gray_img)
-inverter_intensidade(gray_img)
+change_intensity(gray_img)
+invert_intensity(gray_img)
 
 
 
