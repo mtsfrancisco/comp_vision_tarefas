@@ -11,8 +11,6 @@ sobelx = cv2.Sobel(gray, cv2.CV_64F, 1, 0, ksize=3)
 sobely = cv2.Sobel(gray, cv2.CV_64F, 0, 1, ksize=3)
 gradient_magnitude = np.sqrt(sobelx**2.0 + sobely**2.0)
 
-cv2.imshow('Gradient', sobelx)
-cv2.waitKey(0)
 
 gray_values = gray.ravel()
 gradient_values = gradient_magnitude.ravel()

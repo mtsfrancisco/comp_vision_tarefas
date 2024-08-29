@@ -29,5 +29,6 @@ for i in range(4):
         axs[i, j].axis('off')
 plt.show()
 
+print(gradients[0])
 
 
