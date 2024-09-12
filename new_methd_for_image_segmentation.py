@@ -5,7 +5,6 @@ from scipy.interpolate import griddata
 
 image = cv2.imread("images/image1.webp")
 gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-
 # Step 1. Smooth the image replacing every pixel by the average gray-level values
 # of some small neighborhood of it. This serves a few purposes. It is easier to separate
 # the objects from the background when the image is smoother, see [1, 2, 5].
@@ -29,6 +28,8 @@ magnitude = magnitude.astype(np.uint8)
 
 _, threshold_image = cv2.threshold(magnitude, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
 
+
+# PROCEDIMENTO PARECIDO COM O CANNY EDGE DETECTOR
 # Direção do gradiente em radianos
 direction = np.arctan2(sobel_y, sobel_x)
 
@@ -64,6 +65,7 @@ for i in range(1, magnitude.shape[0] - 1):
             non_max_suppression[i, j] = 0
 
 # Normalizar a imagem final para visualização
+
 non_max_suppression = (non_max_suppression / non_max_suppression.max()) * 255
 non_max_suppression = non_max_suppression.astype(np.uint8)
 
@@ -89,11 +91,12 @@ sampled_values = []
 for i in range(0, gray_image.shape[0]):
     for j in range(0, gray_image.shape[1]):
         if non_max_suppression[i, j] != 0:
-           sampled_points.append([i,j])
+           sampled_points.append((i,j))
            sampled_values.append(non_max_suppression[i, j])
 
 
 grid_x, grid_y = np.mgrid[0:gray_image.shape[0], 0:gray_image.shape[1]]
+
 
 threshold_surface = griddata(sampled_points,sampled_values, (grid_x, grid_y), method='cubic', fill_value=0)
 
@@ -109,5 +112,5 @@ for i in range(0, gray_image.shape[0]):
             gray_image[i, j] = 0
 
 cv2.imshow("Threshold Surface", threshold_surface)
-cv2.imshow("Original Image", gray_image)
+cv2.imshow("Result", gray_image)
 cv2.waitKey(0)
