@@ -9,9 +9,9 @@ class UnionFind:
 
     def find(self, p):
         if self.parent[p] != p:
-            self.parent[p] = self.find(self.parent[p])  # Path compression
+            self.parent[p] = self.find(self.parent[p])  
         return self.parent[p]
-
+        
     def union(self, p, q):
         rootP = self.find(p)
         rootQ = self.find(q)
@@ -28,7 +28,7 @@ class UnionFind:
 def contar_componentes_union_find(matriz, valor):
     rows, cols = len(matriz), len(matriz[0])
     uf = UnionFind(rows * cols)
-    index = lambda r, c: r * cols + c  # Função para mapear 2D para 1D
+    index = lambda r, c: r * cols + c  # Fun ção para mapear 2D para 1D
 
     for i in range(rows):
         for j in range(cols):
